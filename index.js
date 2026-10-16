@@ -3,5 +3,7 @@ import express from "express"
 
 
 let app=express()
-app.get()
-tnttn
+app.get("/",(req,res)=>{
+    res.send("hello")
+})
+app.listen(3000)
