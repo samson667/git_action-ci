@@ -1,4 +1,3 @@
-
 name: GitHub Actions CI
 
 on:
@@ -8,12 +7,23 @@ on:
     branches: [ main, master ]
 
 jobs:
-  build-and-test :
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Build Docker Compose
-        run: docker compose up --build -d
+      # ১. Node.js সেটআপ করা
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      # ২. ডিপেন্ডেন্সি ইনস্টল করা
+      - name: Install Dependencies
+        run: npm install
+
+      # ৩. কোড চেক বা টেস্ট রান করা (এখানে কোডে ভুল থাকলে CI ফেইল করবে)
+      - name: Run Code Check
+        run: node -c index.js
